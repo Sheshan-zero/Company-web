@@ -4,6 +4,8 @@ import { motion } from "motion/react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const BASE = import.meta.env.BASE_URL; // <-- important
+
   function Navigation() {
     return (
       <ul className="nav-ul">
@@ -27,14 +29,13 @@ const Navbar = () => {
     <div className="fixed inset-x-0 z-50 w-full backdrop-blur-lg bg-primary/40">
       <div className="mx-auto max-w-7xl c-space">
         <div className="flex items-center justify-between py-2 sm:py-0">
-
           {/* Logo + Brand */}
           <a
-            href="/"
+            href="#home"   // ✅ don’t use "/" on GitHub Pages
             className="flex items-center gap-2 text-xl font-bold text-neutral-400 hover:text-white transition-colors"
           >
             <motion.img
-              src="/assets/logo.png"
+              src={`${BASE}assets/logo.png`}   // ✅
               alt="SIAT Logo"
               className="h-8 w-auto"
               initial={{ opacity: 0, y: -5 }}
@@ -49,7 +50,7 @@ const Navbar = () => {
             className="flex cursor-pointer text-neutral-400 hover:text-white focus:outline-none sm:hidden"
           >
             <img
-              src={isOpen ? "/assets/close.svg" : "/assets/menu.svg"}
+              src={isOpen ? `${BASE}assets/close.svg` : `${BASE}assets/menu.svg`}  // ✅
               className="h-6 w-6"
               alt="menu toggle"
             />

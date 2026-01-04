@@ -6,8 +6,9 @@ import { useFrame } from '@react-three/fiber'
 export function Astronut(props) {
 
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF('/models/tenhun_falling_spaceman_fanart.glb')
-  const { actions } = useAnimations(animations, group)
+  const MODEL_URL = `${import.meta.env.BASE_URL}models/tenhun_falling_spaceman_fanart.glb`;
+  const { nodes, materials, animations } = useGLTF(MODEL_URL);
+  const { actions } = useAnimations(animations, group);
   useEffect(() => {
     if (animations.length > 0){
       actions[animations[0].name]?.play();
@@ -107,4 +108,4 @@ export function Astronut(props) {
   )
 }
 
-useGLTF.preload('/models/tenhun_falling_spaceman_fanart.glb')
+useGLTF.preload(`${import.meta.env.BASE_URL}models/tenhun_falling_spaceman_fanart.glb`);
