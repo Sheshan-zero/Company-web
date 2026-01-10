@@ -1,83 +1,90 @@
 import React, { useState } from "react";
-import { motion } from "motion/react";
+import { Menu } from "lucide-react";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const BASE = import.meta.env.BASE_URL; // <-- important
-
-  function Navigation() {
-    return (
-      <ul className="nav-ul">
-        <li className="nav-li">
-          <a href="#home" className="nav-link">Home</a>
-        </li>
-        <li className="nav-li">
-          <a href="#aboutus" className="nav-link">About Us</a>
-        </li>
-        <li className="nav-li">
-          <a href="#services" className="nav-link">Services</a>
-        </li>
-        <li className="nav-li">
-          <a href="#contact" className="nav-link">Contact Us</a>
-        </li>
-      </ul>
-    );
-  }
+  const navLinks = [
+    { name: "Home", href: "#home" },
+    { name: "About Us", href: "#about" },
+    { name: "Services", href: "#services" },
+    { name: "Contact Us", href: "#contact" },
+  ];
 
   return (
-    <div className="fixed inset-x-0 z-50 w-full backdrop-blur-lg bg-primary/40">
-      <div className="mx-auto max-w-7xl c-space">
-        <div className="flex items-center justify-between py-2 sm:py-0">
-          {/* Logo + Brand */}
-          <a
-            href="#home"   // ✅ don’t use "/" on GitHub Pages
-            className="flex items-center gap-2 text-xl font-bold text-neutral-400 hover:text-white transition-colors"
-          >
-            <motion.img
-              src={`${BASE}assets/logo.png`}   // ✅
-              alt="SIAT Logo"
-              className="h-8 w-auto"
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            />
-          </a>
+    <header className="fixed top-0 left-0 right-0 z-50 h-[88px] glass-nav flex items-center">
+      {/* Gradient Bottom Border */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[1px]"
+        style={{ background: "linear-gradient(90deg, #7a57db, #a855f7)" }}
+      ></div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="flex cursor-pointer text-neutral-400 hover:text-white focus:outline-none sm:hidden"
-          >
+      <div className="max-w-7xl mx-auto w-full px-6 md:px-10 flex items-center justify-between">
+        {/* Logo Section */}
+        <a href="#home" className="flex items-center gap-3 group cursor-pointer">
+          <div className="relative flex items-center justify-center">
             <img
-              src={isOpen ? `${BASE}assets/close.svg` : `${BASE}assets/menu.svg`}  // ✅
-              className="h-6 w-6"
-              alt="menu toggle"
+              src={logo}
+              alt="SIAT Logo"
+              className="w-20 h-20 object-contain"
             />
+            {/* Decorative Glow */}
+            <div className="absolute inset-0 bg-lavender/40 blur-lg rounded-lg -z-10 group-hover:bg-lavender/60 transition-all"></div>
+          </div>
+        </a>
+
+        {/* Desktop Navigation Links */}
+        <nav className="hidden md:flex items-center gap-10">
+          {navLinks.map((link, index) => (
+            <a
+              key={index}
+              href={link.href}
+              className={`text-white/70 hover:text-white text-base font-medium transition-colors nav-underline ${index === 0 ? "nav-link-active" : ""
+                }`}
+            >
+              {link.name}
+            </a>
+          ))}
+        </nav>
+
+        {/* CTA Section */}
+        <div className="flex items-center gap-4">
+          <button className="hidden lg:flex items-center justify-center h-12 px-8 rounded-full bg-gradient-to-r from-lavender to-purple-500 text-white text-sm font-bold tracking-wide hover:shadow-[0_0_20px_rgba(122,87,219,0.4)] transition-all">
+            Start a Project
           </button>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden sm:flex">
-            <Navigation />
-          </nav>
+          {/* Mobile Menu Icon */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-white"
+          >
+            <Menu size={28} />
+          </button>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <motion.div
-          className="block overflow-hidden text-center sm:hidden"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          style={{ maxHeight: "100vh" }}
-        >
-          <nav className="pb-5">
-            <Navigation />
+        <div className="absolute top-[88px] left-0 right-0 glass-nav md:hidden border-t border-white/10">
+          <nav className="flex flex-col items-center py-6 gap-4">
+            {navLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="text-white/70 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                {link.name}
+              </a>
+            ))}
+            <button className="mt-4 flex items-center justify-center h-12 px-8 rounded-full bg-gradient-to-r from-lavender to-purple-500 text-white text-sm font-bold tracking-wide">
+              Start a Project
+            </button>
           </nav>
-        </motion.div>
+        </div>
       )}
-    </div>
+    </header>
   );
 };
 
