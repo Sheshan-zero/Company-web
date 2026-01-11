@@ -1,5 +1,6 @@
 import { Code, Terminal, Database, Cloud, ShieldCheck, Workflow } from "lucide-react";
 import GradientText from "../components/ui/GradientText";
+import LightPillar from "../components/LightPillar";
 
 const TechStack = () => {
     const techCategories = [
@@ -102,7 +103,7 @@ const TechStack = () => {
                         return (
                             <div
                                 key={index}
-                                className="tech-card-border rounded-lg p-8 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-2"
+                                className="tech-card-border p-8 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-2"
                             >
                                 <div className="w-12 h-12 rounded-lg bg-lavender/10 flex items-center justify-center text-lavender">
                                     <Icon size={28} />
@@ -141,7 +142,23 @@ const TechStack = () => {
                 </div>
 
                 {/* CTA Section */}
-                <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-lavender/20 to-navy/50 border border-white/10 p-10 md:p-20 flex flex-col items-center text-center">
+                <div className="cta-card relative overflow-hidden bg-gradient-to-br from-lavender/20 to-navy/50 border border-white/10 p-10 md:p-20 flex flex-col items-center text-center" style={{ minHeight: '400px' }}>
+                    {/* LightPillar Background */}
+                    <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+                        <LightPillar
+                            topColor="#7a57db"
+                            bottomColor="#a855f7"
+                            intensity={1.0}
+                            rotationSpeed={0.3}
+                            glowAmount={0.005}
+                            pillarWidth={3.0}
+                            pillarHeight={0.4}
+                            noiseIntensity={0.5}
+                            pillarRotation={15}
+                            interactive={false}
+                            mixBlendMode="normal"
+                        />
+                    </div>
                     <div
                         className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none"
                         style={{
@@ -156,10 +173,10 @@ const TechStack = () => {
                         Our engineers are experts in modern tech stacks. Let's discuss your roadmap and turn your vision into reality.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 w-full justify-center relative z-10">
-                        <button className="px-8 py-4 bg-lavender hover:bg-lavender/80 text-white font-bold rounded-xl transition-all hover:scale-105 shadow-lg shadow-lavender/20">
+                        <button className="cta-button px-8 py-4 bg-lavender hover:bg-lavender/80 text-white font-bold transition-all hover:scale-105 shadow-lg shadow-lavender/20">
                             Start a Project
                         </button>
-                        <button className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 text-white font-bold rounded-xl transition-all">
+                        <button className="cta-button px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 text-white font-bold transition-all">
                             View Portfolio
                         </button>
                     </div>
