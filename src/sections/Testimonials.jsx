@@ -97,7 +97,7 @@ const Testimonials = () => {
                         {testimonials.map((testimonial, index) => (
                             <div
                                 key={index}
-                                className={`snap-center min-w-[320px] md:min-w-[400px] flex flex-col gap-6 p-8 rounded-xl bg-navy/80 backdrop-blur-sm transition-all hover:translate-y-[-4px] ${testimonial.featured
+                                className={`testimonial-card snap-center min-w-[320px] md:min-w-[400px] flex flex-col gap-6 p-8 bg-navy/80 backdrop-blur-sm transition-all hover:translate-y-[-4px] ${testimonial.featured
                                     ? "glow-border"
                                     : "border border-white/10"
                                     }`}
@@ -142,7 +142,7 @@ const Testimonials = () => {
                             return (
                                 <div
                                     key={index}
-                                    className="flex flex-col items-center text-center p-6 bg-navy/50 rounded-lg border border-white/5 hover:border-lavender/50 transition-colors group"
+                                    className="trust-signal-card flex flex-col items-center text-center p-6 bg-navy/50 border border-white/5 hover:border-lavender/50 transition-colors group"
                                 >
                                     <div className="w-16 h-16 rounded-full bg-lavender/10 flex items-center justify-center mb-4 group-hover:bg-lavender/20 transition-all">
                                         <Icon className="text-lavender" size={28} />
