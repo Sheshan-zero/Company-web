@@ -1,46 +1,66 @@
 import React from 'react';
-import PixelCard from '../components/PixelCard';
 import GradientText from '../components/ui/GradientText';
+import ScrollStack from '../components/lightswind/scroll-stack';
 
 const Services = () => {
     const services = [
         {
-            icon: 'code-slash',
-            title: 'Web Development',
-            description: 'Full-stack web applications built with modern frameworks for maximum performance and security.',
+            id: 1,
+            title: "Web Development",
+            subtitle: "High-performance full-stack web applications",
+            badge: "Service",
+            image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=2072",
+            content: "Modern React, Next.js, and backend solutions built for scale, performance, and security."
         },
         {
-            icon: 'color-palette',
-            title: 'UI/UX Design',
-            description: 'User-centric interface design and behavioral research to create intuitive digital experiences.',
+            id: 2,
+            title: "UI/UX Design",
+            subtitle: "Designs that convert and engage",
+            badge: "Service",
+            image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=2000",
+            content: "User-centric design, research-driven interfaces, and delightful digital experiences."
         },
         {
-            icon: 'cloud-done',
-            title: 'Cloud & DevOps',
-            description: 'Scalable cloud architecture and automated CI/CD pipelines for seamless deployment cycles.',
+            id: 3,
+            title: "Cloud & DevOps",
+            subtitle: "Scalable infrastructure & CI/CD",
+            badge: "Service",
+            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072",
+            content: "AWS, Docker, Kubernetes, and automated deployment pipelines for reliable delivery."
         },
         {
-            icon: 'shield-checkmark',
-            title: 'Cybersecurity',
-            description: 'Advanced data protection, vulnerability assessments, and enterprise-grade security auditing.',
+            id: 4,
+            title: "Cybersecurity",
+            subtitle: "Enterprise-grade protection",
+            badge: "Service",
+            image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070",
+            content: "Security audits, vulnerability assessments, and data protection strategies."
         },
         {
-            icon: 'cube',
-            title: 'ERP & SaaS',
-            description: 'Custom enterprise resource planning and software-as-a-service platforms tailored to your niche.',
+            id: 5,
+            title: "ERP & SaaS",
+            subtitle: "Custom business platforms",
+            badge: "Service",
+            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2015",
+            content: "Tailored ERP systems and SaaS products built to fit your business workflows."
         },
         {
-            icon: 'trending-up',
-            title: 'Digital Growth',
-            description: 'Data-driven SEO strategies and performance marketing to scale your product\'s global reach.',
-        },
+            id: 6,
+            title: "Digital Growth",
+            subtitle: "SEO & performance marketing",
+            badge: "Service",
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070",
+            content: "Data-driven growth strategies to scale traffic, conversions, and revenue."
+        }
     ];
 
     return (
-        <main className="relative overflow-hidden">
+        <main className="relative bg-[#030412]">
             {/* Abstract Glow Orbs */}
-            <div className="absolute top-1/4 -left-20 w-96 h-96 bg-lavender/10 rounded-full blur-[120px] pointer-events-none"></div>
-            <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-lavender/5 rounded-full blur-[120px] pointer-events-none"></div>
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/4 -left-20 w-96 h-96 bg-lavender/10 rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-lavender/5 rounded-full blur-[120px]"></div>
+            </div>
 
             <section className="max-w-7xl mx-auto px-6 py-20 lg:py-32 relative z-10">
                 {/* Section Header */}
@@ -64,31 +84,25 @@ const Services = () => {
                     </p>
                 </div>
 
-                {/* Services Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-                    {services.map((service, index) => (
-                        <PixelCard
-                            key={index}
-                            variant="purple"
-                            className="glass-card rounded-xl group h-full"
-                        >
-                            <div className="absolute inset-0 p-8 flex flex-col items-start gap-6 z-10">
-                                <div className="w-14 h-14 rounded-lg bg-lavender/20 flex items-center justify-center text-lavender transition-transform group-hover:scale-110">
-                                    <ion-icon name={service.icon} style={{ fontSize: '32px' }}></ion-icon>
-                                </div>
-                                <div>
-                                    <h3 className="text-white text-xl font-bold mb-3">{service.title}</h3>
-                                    <p className="text-white/50 text-sm leading-relaxed">
-                                        {service.description}
-                                    </p>
-                                </div>
-                            </div>
-                        </PixelCard>
-                    ))}
+                {/* ScrollStack Implementation */}
+                <div className="w-full flex justify-center items-center">
+                    <ScrollStack
+                        cards={services.map(s => ({
+                            ...s,
+                            backgroundImage: s.image,
+                            content: s.content
+                        }))}
+                        itemWidth="90%"
+                        cardHeight="70vh"
+                        sectionHeightMultiplier={6}
+                        animationDuration="0.8s"
+                        backgroundColor="bg-transparent"
+                        className="z-10"
+                    />
                 </div>
 
                 {/* Footer CTA */}
-                <div className="flex justify-center">
+                <div className="mt-20 flex justify-center">
                     <button className="inline-flex items-center gap-2 px-8 py-4 border-2 border-lavender/30 rounded-xl text-white font-bold hover:bg-lavender/10 hover:border-lavender transition-all group">
                         View All Services
                         <ion-icon name="arrow-forward" style={{ fontSize: '20px' }} className="transition-transform group-hover:translate-x-1"></ion-icon>
