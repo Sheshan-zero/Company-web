@@ -26,7 +26,7 @@ const Footer = () => {
     const contactInfo = [
         { icon: Mail, text: "hello@siat.dev" },
         { icon: Phone, text: "+947 662 21975" },
-        { icon: MapPin, text: "108-2/1 Sri Kathiresan Street, Colombo 05" },
+        { icon: MapPin, text: "393,Pitipana North,Halgahadeniya,Homagama,Sri Lanka" },
     ];
 
     return (

@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About Us", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Contact Us", href: "#contact" },
+    { name: "Home", href: isHomePage ? "#home" : "/", isRoute: !isHomePage },
+    { name: "About Us", href: "/about", isRoute: true },
+    { name: "Services", href: "/services", isRoute: true },
+    { name: "Contact Us", href: "/contact", isRoute: true },
   ];
 
   return (
@@ -22,7 +25,7 @@ const Navbar = () => {
 
       <div className="max-w-7xl mx-auto w-full px-6 md:px-10 flex items-center justify-between">
         {/* Logo Section */}
-        <a href="#home" className="flex items-center gap-3 group cursor-pointer">
+        <Link to="/" className="flex items-center gap-3 group cursor-pointer">
           <div className="relative flex items-center justify-center">
             <img
               src={logo}
@@ -32,19 +35,28 @@ const Navbar = () => {
             {/* Decorative Glow */}
             <div className="absolute inset-0 bg-lavender/40 blur-lg rounded-lg -z-10 group-hover:bg-lavender/60 transition-all"></div>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-10">
           {navLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              className={`text-white/70 hover:text-white text-base font-medium transition-colors nav-underline ${index === 0 ? "nav-link-active" : ""
-                }`}
-            >
-              {link.name}
-            </a>
+            link.isRoute ? (
+              <Link
+                key={index}
+                to={link.href}
+                className={`text-white/70 hover:text-white text-base font-medium transition-colors nav-underline ${location.pathname === link.href ? "nav-link-active" : ""}`}
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={index}
+                href={link.href}
+                className={`text-white/70 hover:text-white text-base font-medium transition-colors nav-underline ${index === 0 && isHomePage ? "nav-link-active" : ""}`}
+              >
+                {link.name}
+              </a>
+            )
           ))}
         </nav>
 
@@ -69,14 +81,25 @@ const Navbar = () => {
         <div className="absolute top-[88px] left-0 right-0 glass-nav md:hidden border-t border-white/10">
           <nav className="flex flex-col items-center py-6 gap-4">
             {navLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-white/70 hover:text-white text-base font-medium transition-colors py-2"
-              >
-                {link.name}
-              </a>
+              link.isRoute ? (
+                <Link
+                  key={index}
+                  to={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-white/70 hover:text-white text-base font-medium transition-colors py-2"
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <a
+                  key={index}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-white/70 hover:text-white text-base font-medium transition-colors py-2"
+                >
+                  {link.name}
+                </a>
+              )
             ))}
             <button className="mt-4 flex items-center justify-center h-12 px-8 rounded-full bg-gradient-to-r from-lavender to-purple-500 text-white text-sm font-bold tracking-wide">
               Start a Project
@@ -89,3 +112,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
